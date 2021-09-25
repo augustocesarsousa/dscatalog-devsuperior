@@ -30,6 +30,19 @@ public class ProductRepositoryTests {
 	}
 	
 	@Test
+	public void saveShouldPersistsWithAutoincrementWhenIdIsNull() {
+		
+		Product product = Factory.createdProduct();
+		product.setId(null);
+		
+		product = repository.save(product);
+		
+		Assertions.assertNotNull(product.getId());
+		Assertions.assertEquals(countTotalProducts + 1, product.getId());
+		
+	}
+	
+	@Test
 	public void deleteShouldDeleteObjectWhenIdExists() {
 		
 		repository.deleteById(existingId);
