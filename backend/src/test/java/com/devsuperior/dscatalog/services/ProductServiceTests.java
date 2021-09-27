@@ -45,6 +45,7 @@ public class ProductServiceTests {
 	private long dependentId;
 	private PageImpl<Product> page;
 	private Product product;
+	private ProductDTO productDTO;
 	
 	@BeforeEach
 	void setUp() throws Exception {
@@ -52,12 +53,13 @@ public class ProductServiceTests {
 		noExistingId = 1000L;
 		dependentId = 4L;
 		product = Factory.createdProduct();
+		productDTO = Factory.createdProductDTO();
 		page = new PageImpl<>(List.of(product));
 		
 		when(repository.findAll((Pageable)ArgumentMatchers.any())).thenReturn(page);
 		
 		when(repository.findById(existingId)).thenReturn(Optional.of(product));		
-		when(repository.findById(existingId)).thenReturn(Optional.empty());
+		when(repository.findById(noExistingId)).thenReturn(Optional.empty());
 		
 		when(repository.save(ArgumentMatchers.any())).thenReturn(product);
 		
@@ -74,6 +76,26 @@ public class ProductServiceTests {
 		
 		Assertions.assertNotNull(result);
 		verify(repository, times(1)).findAll(pageable);
+		
+	}
+	
+	@Test
+	public void findByIdShouldReturnProductDTOWhenIdExists() {
+		
+		ProductDTO productDTO = service.findById(existingId);
+		
+		Assertions.assertNotNull(productDTO);
+		verify(repository, times(1)).findById(existingId);
+		
+	}
+	
+	@Test
+	public void findByIdShouldThrowResourceNotFoundExceptionWhenIdDoesNotExists() {
+		
+		Assertions.assertThrows(ResourceNotFoundException.class, () -> {
+			service.findById(noExistingId);
+		});
+		verify(repository, times(1)).findById(noExistingId);
 		
 	}
 	
