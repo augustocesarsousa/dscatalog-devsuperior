@@ -7,6 +7,7 @@ import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -56,6 +57,8 @@ public class ProductResourcesTests {
 		productDTO = Factory.createdProductDTO();
 		page = new PageImpl<>(List.of(productDTO));
 		
+		when(service.insert(any())).thenReturn(productDTO);
+		
 		when(service.findAllPaged(any())).thenReturn(page);
 		
 		when(service.findById(existingId)).thenReturn(productDTO);		
@@ -67,6 +70,18 @@ public class ProductResourcesTests {
 		doNothing().when(service).delete(existingId);
 		doThrow(ResourceNotFoundException.class).when(service).delete(noExistingId);
 		doThrow(DataBaseException.class).when(service).delete(dependentId);
+	}
+	
+	@Test
+	public void insertShouldReturnCreated() throws Exception {
+		String jsonBody = objectMapper.writeValueAsString(productDTO);
+		
+		mockMvc.perform(post("/products")
+				.content(jsonBody)
+				.contentType(MediaType.APPLICATION_JSON))
+				.andExpect(status().isCreated())
+				.andExpect(jsonPath("$.id").exists())
+				.andExpect(jsonPath("$.name").exists());
 	}
 	
 	@Test
