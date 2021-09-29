@@ -118,6 +118,7 @@ public class ProductServiceTests {
 		ProductDTO result = service.update(existingId, productDTO);
 		
 		Assertions.assertNotNull(result);
+		verify(repository, times(1)).save(product);
 		
 	}
 	
