@@ -16,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.devsuperior.dscatalog.dto.ProductDTO;
 import com.devsuperior.dscatalog.tests.Factory;
+import com.devsuperior.dscatalog.tests.TokenUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @SpringBootTest
@@ -29,12 +30,22 @@ public class ProductResourceIT {
 	@Autowired
 	private ObjectMapper objectMapper;
 	
+	@Autowired
+	private TokenUtil tokenUtil;
+	
 	private Long existingId;
 	private Long noExistingId;
 	private Long countTotalProducts;
+
+	private String username;
+	private String password;
 	
 	@BeforeEach
 	void setUp() throws Exception {
+		
+		username = "maria@gmail.com";
+		password = "123456";
+		
 		existingId = 1L;
 		noExistingId = 1000L;
 		countTotalProducts = 25L;		
@@ -56,6 +67,8 @@ public class ProductResourceIT {
 	@Test
 	public void updateShouldReturnProductDTOWhenIdExists() throws Exception {
 		
+		String accessToken = tokenUtil.obtainAccessToken(mockMvc, username, password);
+		
 		ProductDTO productDTO = Factory.createdProductDTO();
 		String jsonBody = objectMapper.writeValueAsString(productDTO);
 		
@@ -63,6 +76,7 @@ public class ProductResourceIT {
 		String expectedDescription = productDTO.getDescription();
 		
 		mockMvc.perform(put("/products/{id}", existingId)
+			.header("Authorization", "Bearer " + accessToken)
 			.content(jsonBody)
 			.contentType(MediaType.APPLICATION_JSON))
 			.andExpect(status().isOk())
@@ -75,10 +89,13 @@ public class ProductResourceIT {
 	@Test
 	public void updateShouldReturnNotFoundWhenIdDoesNotExists() throws Exception {
 		
+		String accessToken = tokenUtil.obtainAccessToken(mockMvc, username, password);
+		
 		ProductDTO productDTO = Factory.createdProductDTO();
 		String jsonBody = objectMapper.writeValueAsString(productDTO);
 		
 		mockMvc.perform(put("/products/{id}", noExistingId)
+			.header("Authorization", "Bearer " + accessToken)
 			.content(jsonBody)
 			.contentType(MediaType.APPLICATION_JSON))
 			.andExpect(status().isNotFound());
