@@ -1,11 +1,13 @@
 .home-container {
-    padding: 20px;
-    font-size: 26px;
+    padding: 10px;
+    font-size: 20px;
     text-align: center;
     border: 1px solid red;
 }
 
 .home-card {
+    display: flex;
+    flex-direction: column-reverse;
     border: 1px solid orange;
     background-color: #fff;
     border-radius: 20px;
@@ -13,15 +15,28 @@
 }
 
 .home-content-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px 10px 60px;
     border: 1px solid blue;
 }
 
 .home-content-container h1 {
     font-size: 1em;
+    width: 260px;
+    margin-bottom: 15px;
+} 
+
+.home-content-container p:nth-child(2) {
+    margin-bottom: 30px;
+    font-size: 0.6em;
+    width: 260px;
+    color: #9E9E9E;
 } 
 
 .home-image-container {
-    padding: 0 15px;
+    padding: 50px 15px;
     border: 1px solid purple;
 }
 
