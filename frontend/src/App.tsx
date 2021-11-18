@@ -1,11 +1,12 @@
-import Catalog from 'pages/Catalog';
 import './assets/styles/custom.scss';
 import './App.css';
+
+import Routes from 'Routes';
 
 function App() {
   return (
     <>
-      <Catalog />
+      <Routes />
     </>
   );
 }
