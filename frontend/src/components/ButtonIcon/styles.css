@@ -30,6 +30,10 @@
     padding: 0;
 }
 
+.btn-icon svg {
+    color: white;
+}
+
 @media (min-width: 576px){
 
     .btn-text p {
