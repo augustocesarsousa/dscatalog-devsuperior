@@ -1,6 +1,7 @@
 import { ReactComponent as ArrowIcon } from 'assets/images/arrow.svg';
 import axios from 'axios';
 import ProductPrice from 'components/ProductPrice';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Product } from 'types/product';
 import { BASE_URL } from 'util/requests';
@@ -8,13 +9,13 @@ import { BASE_URL } from 'util/requests';
 import './styles.css';
 
 export default function ProductDetails() {
+  const [product, setProduct] = useState<Product>();
 
-  let product : Product;
-
-  axios.get(BASE_URL + "/products/2")
-  .then(response => {
-    console.log(response.data)
-  });
+  useEffect(() => {
+    axios.get(BASE_URL + '/products/1').then((response) => {
+      setProduct(response.data);
+    });
+  }, []);
 
   return (
     <div className="product-details-container">
@@ -28,23 +29,17 @@ export default function ProductDetails() {
         <div className="row">
           <div className="col-xl-6">
             <div className="img-container">
-              <img
-                src="https://raw.githubusercontent.com/devsuperior/dscatalog-resources/master/backend/img/2-big.jpg"
-                alt="Descrição da imagem"
-              />
+              <img src={product?.imgUrl} alt={product?.name} />
             </div>
             <div className="name-price-container">
-              <h1>Nome do produto</h1>
-              <ProductPrice price={1234.56} />
+              <h1>{product?.name}</h1>
+              {product && <ProductPrice price={product?.price} />}
             </div>
           </div>
           <div className="col-xl-6">
             <div className="description-container">
               <h2>Descrição do produto</h2>
-              <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Doloribus, hic.
-              </p>
+              <p>{product?.description}</p>
             </div>
           </div>
         </div>
