@@ -3,14 +3,8 @@
     flex-direction: column;
 }
 
-
-.admin-container  nav{
-    border: 1px solid orange;
-}
-
 .admin-content {
     padding: 20px;
-    border: 1px solid blue;
 }
 
 @media(min-width: 1200px) {
