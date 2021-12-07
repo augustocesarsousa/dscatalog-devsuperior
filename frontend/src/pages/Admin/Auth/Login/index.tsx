@@ -2,30 +2,36 @@ import { Link } from 'react-router-dom';
 import ButtonIcon from 'components/ButtonIcon';
 import { useForm } from 'react-hook-form';
 import { resquestBackendLogin } from 'util/requests';
+import { useState } from 'react';
 
 import './styles.css';
 
 type FormData = {
-    username: string;
-    password: string;
-}
+  username: string;
+  password: string;
+};
 
 const Login = () => {
+  const [hasError, setHasError] = useState(false);
+
   const { register, handleSubmit } = useForm<FormData>();
 
-  const onSubmit = (formData : FormData) => {
+  const onSubmit = (formData: FormData) => {
     resquestBackendLogin(formData)
-    .then(response => {
-      console.log('Sucess ', response);
-    })
-    .catch(error => {
-      console.log('ERRO ', error);
-    })
+      .then((response) => {
+        setHasError(false);
+        console.log('Sucess ', response);
+      })
+      .catch((error) => {
+        setHasError(true);
+        console.log('ERRO ', error);
+      });
   };
 
   return (
     <div className="base-card login-card">
       <h1>LOGIN</h1>
+      {hasError && <div className="alert alert-danger">Erro ao fazer requisição!</div>}
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="mb-4">
           <input
