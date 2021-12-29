@@ -48,3 +48,43 @@
 .product-crud-card-button-first {
   margin-right: 10px;
 }
+
+@media(min-width: 768px){
+  .product-crud-card-top-container {
+    border-right: 1px solid #e1e1e1;
+    border-bottom: 0;
+  }
+
+  .product-crud-card{
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 0;
+  }
+
+  .product-crud-card-description{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .product-crud-card-buttons-container{
+    flex-direction: column-reverse;
+    justify-content: center;
+  }
+
+  .product-crud-card-button{
+    width: 150px;
+  }
+
+  .product-crud-card-button-first {
+    margin-right: 0;
+    margin-top: 22px;
+  }
+}
+
+@media(min-width: 992px){
+  .product-crud-card-button{
+    width: 220px;
+  }
+}
