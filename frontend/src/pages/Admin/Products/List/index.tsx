@@ -14,6 +14,10 @@ const List = () => {
     date: '2020-07-13T20:50:07.123450Z',
     categories: [
       {
+        id: 3,
+        name: 'Celulares',
+      },
+      {
         id: 2,
         name: 'Eletrônicos',
       },
