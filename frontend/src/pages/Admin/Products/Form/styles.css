@@ -29,6 +29,29 @@
     justify-content: space-between;
 }
 
+.product-crud-button:nth-child(2){
+    color: #fff;
+}
+
+.product-crud-button{
+    height: 50px;
+    border-radius: 10px;
+    width: 110px;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+@media(min-width: 576px){
+    .product-crud-buttons-container{
+        justify-content: flex-end;
+    }
+
+    .product-crud-button{
+        width: 270px;
+        margin-left: 30px;
+    }
+}
+
 @media(min-width: 992px){
     .product-crud-inputs-left-container{
         margin-bottom: 0;

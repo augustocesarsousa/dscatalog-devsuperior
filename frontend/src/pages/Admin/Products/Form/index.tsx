@@ -19,16 +19,18 @@ const Form = () => {
               </div>
             </div>
             <div className="col-lg-6">
+              <div>
               <textarea
                 name=""
-                rows={10}
-                className="form-control base-input"
-              ></textarea>
+                rows={8}
+                className="form-control base-input h-auto"
+              />
+              </div>              
             </div>
           </div>
           <div className="product-crud-buttons-container">
-            <button className="btn btn-outline-danger">cancelar</button>
-            <button className="btn btn-primary">salvar</button>
+            <button className="btn btn-outline-danger product-crud-button">cancelar</button>
+            <button className="btn btn-primary product-crud-button">salvar</button>
           </div>
         </form>
       </div>
