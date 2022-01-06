@@ -14,11 +14,7 @@ type ProductFilterData = {
 const ProductFilter = () => {
   const [selectCategories, setSelectCategories] = useState<Category[]>([]);
 
-  const {
-    register,
-    handleSubmit,
-    control,
-  } = useForm<ProductFilterData>();
+  const { register, handleSubmit, control } = useForm<ProductFilterData>();
 
   const onSubmit = (formData: ProductFilterData) => {
     console.log('enviou...', formData);
@@ -41,7 +37,7 @@ const ProductFilter = () => {
             placeholder="Nome do produto"
             name="name"
           />
-          <button>
+          <button className="product-filter-button-searth-icon">
             <SearchIcon />
           </button>
         </div>
@@ -55,15 +51,17 @@ const ProductFilter = () => {
                   {...field}
                   options={selectCategories}
                   isClearable
-                  classNamePrefix="product-crud-select"
+                  classNamePrefix="product-filter-select"
                   getOptionLabel={(category: Category) => category.name}
                   getOptionValue={(category: Category) => String(category.id)}
-                  placeholder="Categorias"
+                  placeholder="Categoria"
                 />
               )}
             />
           </div>
-          <button className="btn btn-outline-secondary">limpar filtro</button>
+          <button className="btn btn-outline-secondary product-filter-button-clean">
+            limpar <span className="product-filter-button-clean-word">filtro</span>
+          </button>
         </div>
       </form>
     </div>
