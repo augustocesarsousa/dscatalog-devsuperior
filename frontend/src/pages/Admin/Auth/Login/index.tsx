@@ -1,13 +1,13 @@
-import { Link, useHistory, useLocation } from 'react-router-dom';
-import ButtonIcon from 'components/ButtonIcon';
-import { useForm } from 'react-hook-form';
-import { resquestBackendLogin } from 'util/requests';
-import { useContext, useState } from 'react';
 import { AuthContext } from 'AuthContext';
-import { saveAuthData } from 'util/storage';
+import ButtonIcon from 'components/ButtonIcon';
+import { useContext, useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { Link, useHistory, useLocation } from 'react-router-dom';
 import { getTokenData } from 'util/auth';
-
+import { resquestBackendLogin } from 'util/requests';
+import { saveAuthData } from 'util/storage';
 import './styles.css';
+
 
 type CredentialsDTO = {
   username: string;
@@ -24,6 +24,7 @@ const Login = () => {
 
   const { from } = location.state || { from : { pathname: '/admin'}};
 
+  // eslint-disable-next-line
   const { authContextData, setAuthContextData } = useContext(AuthContext);
 
   const [hasError, setHasError] = useState(false);
