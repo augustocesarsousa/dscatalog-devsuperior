@@ -1,6 +1,6 @@
+import { ReactComponent as ArrowIcon } from 'assets/images/arrow.svg';
 import './styles.css';
 
-import { ReactComponent as ArrowIcon } from 'assets/images/arrow.svg';
 
 type Props = {
   text: string;
@@ -13,7 +13,7 @@ const ButtonIcon = ({ text }: Props) => {
         <p>{text}</p>
       </div>
       <div className="btn-icon">
-        <ArrowIcon />
+        <ArrowIcon data-testid="arrow"/>
       </div>
     </button>
   );
