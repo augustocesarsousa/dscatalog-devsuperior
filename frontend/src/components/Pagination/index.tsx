@@ -1,7 +1,7 @@
 import { ReactComponent as ArrowIcon } from 'assets/images/arrow.svg';
 import ReactPaginate from 'react-paginate';
-
 import './styles.css';
+
 
 type Props = {
   forcePage?: number
@@ -21,12 +21,12 @@ export default function Pagination({ forcePage, pageCount, range, onChange }: Pr
       pageLinkClassName="pagination-item"
       breakClassName="pagination-item"
       previousLabel={
-        <div className="pagination-arrow-container">
+        <div className="pagination-arrow-container" data-testid="arrow-previous">
           <ArrowIcon />
         </div>
       }
       nextLabel={
-        <div className="pagination-arrow-container">
+        <div className="pagination-arrow-container" data-testid="arrow-next">
           <ArrowIcon />
         </div>
       }
