@@ -22,7 +22,11 @@ describe('product form create tests', () => {
       </Router>
     );
 
-    screen.debug();
-    //expect(screen.getByText(text)).toBeInTheDocument();
+    const nameImput = screen.getByTestId("name");
+    const categoriesImput = screen.getByLabelText("Categorias");
+    const priceImput = screen.getByTestId("price");
+    const imgUrlImput = screen.getByTestId("imgUrl");
+    const descriptionImput = screen.getByTestId("description");
+
   });
 });

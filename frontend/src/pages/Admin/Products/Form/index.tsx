@@ -1,13 +1,13 @@
 import { AxiosRequestConfig } from 'axios';
 import { useEffect, useState } from 'react';
 import CurrencyInput from 'react-currency-input-field';
-import { useForm, Controller } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 import { useHistory, useParams } from 'react-router-dom';
 import Select from 'react-select';
+import { toast } from 'react-toastify';
 import { Category } from 'types/catecory';
 import { Product } from 'types/product';
 import { requestBackend } from 'util/requests';
-import { toast } from 'react-toastify';
 import './styles.css';
 
 type UrlParams = {
@@ -103,12 +103,14 @@ const Form = () => {
                   }`}
                   placeholder="Nome do produto"
                   name="name"
+                  data-testid="name"
                 />
                 <div className="invalid-feedback d-block">
                   {errors.name?.message}
                 </div>
               </div>
               <div className="margin-bottom-30">
+                <label htmlFor="categories" className='d-none'>Categorias</label>
                 <Controller
                   name="categories"
                   rules={{ required: true }}
@@ -123,6 +125,7 @@ const Form = () => {
                       getOptionValue={(category: Category) =>
                         String(category.id)
                       }
+                      inputId='categories'
                       placeholder="Categorias"
                     />
                   )}
@@ -147,6 +150,7 @@ const Form = () => {
                       disableGroupSeparators={true}
                       value={field.value}
                       onValueChange={field.onChange}
+                      data-testid="price"
                     />
                   )}
                 />
@@ -169,6 +173,7 @@ const Form = () => {
                   }`}
                   placeholder="Url da imagem do produto"
                   name="imgUrl"
+                  data-testid="imgUrl"
                 />
                 <div className="invalid-feedback d-block">
                   {errors.imgUrl?.message}
@@ -187,6 +192,7 @@ const Form = () => {
                   }`}
                   placeholder="Descrição"
                   name="description"
+                  data-testid="description"
                 />
                 <div className="invalid-feedback d-block">
                   {errors.description?.message}
