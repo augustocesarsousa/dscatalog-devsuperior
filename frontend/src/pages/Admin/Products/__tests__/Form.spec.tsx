@@ -1,7 +1,14 @@
 import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { Router, useParams } from 'react-router-dom';
+import selectEvent from 'react-select-event';
 import history from 'util/history';
 import Form from '../Form';
+import { server } from './fixtures';
+
+beforeAll(() => server.listen());
+afterEach(() => server.resetHandlers());
+afterAll(() => server.close());
 
 jest.mock('react-router-dom', () => ({
   ...jest.requireActual('react-router-dom'),
@@ -15,18 +22,24 @@ describe('product form create tests', () => {
         })
     })
 
-  test('should render Form', () => {
+  test('should render Form', async () => {
     render(
       <Router history={history}>
         <Form />
       </Router>
     );
 
-    const nameImput = screen.getByTestId("name");
-    const categoriesImput = screen.getByLabelText("Categorias");
-    const priceImput = screen.getByTestId("price");
-    const imgUrlImput = screen.getByTestId("imgUrl");
-    const descriptionImput = screen.getByTestId("description");
+    const nameInput = screen.getByTestId("name");
+    const priceInput = screen.getByTestId("price");
+    const imgUrlInput = screen.getByTestId("imgUrl");
+    const descriptionInput = screen.getByTestId("description");
+    const categoriesInput = screen.getByLabelText("Categorias");
 
+    userEvent.type(nameInput, 'Computador');
+    userEvent.type(priceInput, '5000.12');
+    userEvent.type(imgUrlInput, 'https://i.kym-cdn.com/entries/icons/facebook/000/019/649/OK_thumb.jpg');
+    userEvent.type(descriptionInput, 'Computador i7, 8GB ram, 512 SSD');
+
+    await selectEvent.select(categoriesInput, ['Computadores', 'Eletrônicos'])
   });
 });
