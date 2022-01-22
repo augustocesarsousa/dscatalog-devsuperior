@@ -5,7 +5,7 @@ import selectEvent from 'react-select-event';
 import { ToastContainer } from 'react-toastify';
 import history from 'util/history';
 import Form from '../Form';
-import { server } from './fixtures';
+import { productResponse, server } from './fixtures';
 
 beforeAll(() => server.listen());
 afterEach(() => server.resetHandlers());
@@ -111,5 +111,49 @@ describe('product form create tests', () => {
       const messages = screen.queryAllByText('Campo obrigatório');
       expect(messages).toHaveLength(0);
     });
+  });
+});
+
+describe('product form update tests', () => {
+  beforeEach(() => {
+    (useParams as jest.Mock).mockReturnValue({
+      productId: '1',
+    });
+  });
+
+  test('should show toast and redirection when submit form correctly', async () => {
+    render(
+      <Router history={history}>
+        <ToastContainer />
+        <Form />
+      </Router>
+    );
+
+    const nameInput = screen.getByTestId('name');
+    const priceInput = screen.getByTestId('price');
+    const imgUrlInput = screen.getByTestId('imgUrl');
+    const descriptionInput = screen.getByTestId('description');
+    const formElement = screen.getByTestId('form');
+
+    await waitFor(() => {
+      expect(nameInput).toHaveValue(productResponse.name);
+      expect(priceInput).toHaveValue(String(productResponse.price));
+      expect(imgUrlInput).toHaveValue(productResponse.imgUrl);
+      expect(descriptionInput).toHaveValue(productResponse.description);
+
+      const ids = productResponse.categories.map(x => String(x.id));
+      expect(formElement).toHaveFormValues({ categories: ids });
+    });
+
+    const submitButton = screen.getByRole('button', { name: /salvar/i });
+
+    userEvent.click(submitButton);
+
+    await waitFor(() => {
+      const toastElement = screen.getByText('Produto editado com sucesso!');
+      expect(toastElement).toBeInTheDocument();
+    });
+
+    expect(history.location.pathname).toEqual('/admin/products');
   });
 });
