@@ -34,12 +34,15 @@ describe('product form create tests', () => {
     const imgUrlInput = screen.getByTestId("imgUrl");
     const descriptionInput = screen.getByTestId("description");
     const categoriesInput = screen.getByLabelText("Categorias");
+    const submitButton = screen.getByRole('button', { name: /salvar/i})
 
+    await selectEvent.select(categoriesInput, ['Computadores', 'Eletrônicos'])
+    
     userEvent.type(nameInput, 'Computador');
     userEvent.type(priceInput, '5000.12');
     userEvent.type(imgUrlInput, 'https://i.kym-cdn.com/entries/icons/facebook/000/019/649/OK_thumb.jpg');
     userEvent.type(descriptionInput, 'Computador i7, 8GB ram, 512 SSD');
 
-    await selectEvent.select(categoriesInput, ['Computadores', 'Eletrônicos'])
+    userEvent.click(submitButton);
   });
 });
