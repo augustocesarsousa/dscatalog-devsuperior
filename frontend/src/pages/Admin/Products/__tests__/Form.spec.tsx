@@ -74,4 +74,42 @@ describe('product form create tests', () => {
       expect(messages).toHaveLength(5);
     });
   });
+
+  test('should clear validation messages when filling out the form correctly', async () => {
+    render(
+      <Router history={history}>
+        <Form />
+      </Router>
+    );
+
+    const submitButton = screen.getByRole('button', { name: /salvar/i });
+
+    userEvent.click(submitButton);
+
+    await waitFor(() => {
+      const messages = screen.getAllByText('Campo obrigatório');
+      expect(messages).toHaveLength(5);
+    });
+
+    const nameInput = screen.getByTestId('name');
+    const priceInput = screen.getByTestId('price');
+    const imgUrlInput = screen.getByTestId('imgUrl');
+    const descriptionInput = screen.getByTestId('description');
+    const categoriesInput = screen.getByLabelText('Categorias');
+
+    await selectEvent.select(categoriesInput, ['Computadores', 'Eletrônicos']);
+
+    userEvent.type(nameInput, 'Computador');
+    userEvent.type(priceInput, '5000.12');
+    userEvent.type(
+      imgUrlInput,
+      'https://i.kym-cdn.com/entries/icons/facebook/000/019/649/OK_thumb.jpg'
+    );
+    userEvent.type(descriptionInput, 'Computador i7, 8GB ram, 512 SSD');
+
+    await waitFor(() => {
+      const messages = screen.queryAllByText('Campo obrigatório');
+      expect(messages).toHaveLength(0);
+    });
+  });
 });
