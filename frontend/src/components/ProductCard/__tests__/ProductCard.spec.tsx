@@ -14,5 +14,5 @@ test('should render ProductCard', () => {
   expect(screen.getByText(product.name)).toBeInTheDocument();
   expect(screen.getByAltText(product.name)).toBeInTheDocument(); 
   expect(screen.getByText('R$')).toBeInTheDocument(); 
-  expect(screen.getByText('1,000.00')).toBeInTheDocument();
+  expect(screen.getByText('1.000,00')).toBeInTheDocument();
 });

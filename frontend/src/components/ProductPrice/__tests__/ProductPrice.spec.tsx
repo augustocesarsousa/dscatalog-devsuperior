@@ -7,5 +7,5 @@ test('should render ProductPrice', () => {
   render(<ProductPrice price={price} />);
 
   expect(screen.getByText('R$')).toBeInTheDocument();
-  expect(screen.getByText('1,250.00')).toBeInTheDocument();
+  expect(screen.getByText('1.250,00')).toBeInTheDocument();
 });
