@@ -1,5 +1,10 @@
 .auth-container {
   display: flex;
+  justify-content: center;
+}
+
+.auth-content {
+  display: flex;
   justify-content: space-around;
   padding: 20px;
 }
@@ -25,19 +30,21 @@
 }
 
 @media (min-width: 1200px) {
-  .auth-container {
+  .auth-content {
     padding: 40px;
+    width: 1280px;
+    max-height: 570px;
   }
 
   .auth-banner-container {
     display: flex;
     flex-direction: column;
     margin-top: 40px;
-    width: 500px;
+    width: 400px;
   }
 
   .auth-banner-container h1 {
-    font-size: 40px;
+    font-size: 30px;
     letter-spacing: -0.015em;
     margin-bottom: 15px;
   }
@@ -49,26 +56,11 @@
   }
 
   .auth-banner-container svg {
-      width: 100%;
+    height: 280px;
+    width: 100%;
+  }
+
+  .auth-form-container {
+    width: 400px;
   }
 }
-
-@media (min-width: 1400px) {
-  
-    .auth-banner-container {
-      width: 650px;
-    }
-  
-    .auth-banner-container h1 {
-      font-size: 55px;
-      margin-bottom: 25px;
-    }
-  
-    .auth-banner-container p {
-      font-size: 24px;
-    }
-  
-    .auth-banner-container svg {
-        width: 100%;
-    }
-  }

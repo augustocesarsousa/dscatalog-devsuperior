@@ -10,8 +10,8 @@
   letter-spacing: -0.015em;
   color: #263238;
   text-transform: uppercase;
-  margin-top: 70px;
-  margin-bottom: 50px;
+  margin-top: 30px;
+  margin-bottom: 30px;
 }
 
 .login-link-recover {
@@ -19,7 +19,7 @@
   letter-spacing: -0.015em;
   color: #407bff;
   display: block;
-  margin-bottom: 90px;
+  margin-bottom: 30px;
 }
 .login-link-register {
   font-weight: bold;
@@ -45,8 +45,31 @@
   margin-bottom: 30px;
 }
 
-@media (min-width: 576px){
-    .login-card {
-        padding: 50px;
-    }
+@media (min-width: 576px) {
+  .login-card {
+    padding: 30px;
+  }
+  
+  .login-card h1 {
+    font-size: 2.5em;
+    margin-top: 70px;
+    margin-bottom: 50px;
+  }
+
+  .login-link-recover {
+    margin-bottom: 90px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .login-card h1 {
+    font-size: 2em;
+    margin-top: 30px;
+    margin-bottom: 30px;
+  }
+
+  .login-link-recover {
+    margin-bottom: 30px;
+  }
+
 }
