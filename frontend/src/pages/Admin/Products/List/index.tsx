@@ -1,13 +1,13 @@
-import './styles.css';
-import ProductCrudCard from 'pages/Admin/Products/ProductCrudCard';
-import { Link } from 'react-router-dom';
-import { useCallback, useEffect, useState } from 'react';
-import { SpringPage } from 'types/vendor/spring';
-import { Product } from 'types/product';
 import { AxiosRequestConfig } from 'axios';
-import { requestBackend } from 'util/requests';
 import Pagination from 'components/Pagination';
 import ProductFilter, { ProductFilterData } from 'components/ProductFilter';
+import ProductCrudCard from 'pages/Admin/Products/ProductCrudCard';
+import { useCallback, useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { Product } from 'types/product';
+import { SpringPage } from 'types/vendor/spring';
+import { requestBackend } from 'util/requests';
+import './styles.css';
 
 type ControlComponentsData = {
   activePage: number;
@@ -61,7 +61,7 @@ const List = () => {
   return (
     <div className="product-crud-container">
       <div className="product-crud-bar-container">
-        <Link to="/admin/products/create">
+        <Link to="/admin/products/create" className="btn-crud-add-link">
           <button className="btn btn-primary text-white btn-crud-add">
             adicionar
           </button>
