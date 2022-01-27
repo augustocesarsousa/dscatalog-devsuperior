@@ -1,10 +1,11 @@
-import { Switch } from 'react-router';
-import Navbar from './Navbar';
-import Users from './Users';
 import PrivateRoute from 'components/PrivateRoute';
-
-import './styles.css';
+import { Switch } from 'react-router';
+import Categoies from './Categories';
+import Navbar from './Navbar';
 import Products from './Products';
+import './styles.css';
+import Users from './Users';
+
 
 const Admin = () => {
   return (
@@ -16,7 +17,7 @@ const Admin = () => {
             <Products />
           </PrivateRoute>
           <PrivateRoute path="/admin/categories">
-            <h1>Categorie CRUD</h1>
+            <Categoies />
           </PrivateRoute>
           <PrivateRoute path="/admin/users" roles={['ROLE_ADMIN']}>
             <Users />
