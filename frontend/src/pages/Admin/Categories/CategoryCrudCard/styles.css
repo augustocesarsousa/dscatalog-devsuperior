@@ -1,0 +1,61 @@
+.category-crud-card-container {
+  padding: 15px;
+  margin-bottom: 20px;
+}
+
+.category-crud-card-buttons-container {
+  padding: 0 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.category-crud-card-text-content {
+  margin-bottom: 15px;
+  border-bottom: 1px solid #e1e1e1;
+}
+
+.category-crud-card-text {
+  font-size: 18px;
+  margin-bottom: 15px;
+}
+
+.category-crud-card-button {
+  width: 100%;
+  height: 40px;
+  margin-bottom: 10px;
+  font-weight: bold;
+  font-size: 14px;
+  letter-spacing: -0.015em;
+  text-transform: uppercase;
+  border-radius: 10px;
+}
+
+@media (min-width: 768px) {
+  .category-crud-card-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .category-crud-card-text-content {
+    margin-bottom: 0;
+    border-bottom: none;
+  }
+
+  .category-crud-card-text {
+    margin-bottom: 0;
+  }
+
+  .category-crud-card-buttons-content {
+    display: flex;
+  }
+
+  .category-crud-card-button {
+    margin-bottom: 0;
+    width: 140px;
+  }
+
+  .category-crud-card-button:nth-child(1) {
+    margin-right: 10px;
+  }
+}

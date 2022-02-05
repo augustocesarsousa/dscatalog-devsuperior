@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { Category } from 'types/catecory';
 import { SpringPage } from 'types/vendor/spring';
 import { requestBackend } from 'util/requests';
+import CategoryCrudCard from '../CategoryCrudCard';
 import CategoryFilter from '../CategoryFilter';
 import './styles.css';
 
@@ -35,8 +36,10 @@ function CategoryList() {
         </Link>
         <CategoryFilter />
       </div>
-      {page?.content.map((item) => (
-        <p key={item.id}>{item.name}</p>
+      {page?.content.map((category) => (
+        <div key={category.id}>
+          <CategoryCrudCard category={category} onDelete={() => {}} />
+        </div>
       ))}
     </div>
   );
