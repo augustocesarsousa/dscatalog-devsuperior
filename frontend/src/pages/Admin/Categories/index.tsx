@@ -1,45 +1,18 @@
-import { AxiosRequestConfig } from 'axios';
-import CategoryFilter from 'components/CategoryFilter';
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { Category } from 'types/catecory';
-import { SpringPage } from 'types/vendor/spring';
-import { requestBackend } from 'util/requests';
-import './styles.css';
+import { Route, Switch } from 'react-router-dom';
+import CategoryForm from './CategoryForm';
+import CategoryList from './CategoryList';
 
-function Categoies() {
-  const [page, setPage] = useState<SpringPage<Category>>();
-
-  useEffect(() => {
-    const params: AxiosRequestConfig = {
-      url: '/categories',
-      withCredentials: true,
-      params: {
-        page: 0,
-        size: 12,
-      },
-    };
-
-    requestBackend(params).then((response) => {
-      setPage(response.data);
-    });
-  }, []);
-
+const Categories = () => {
   return (
-    <div className="category-crud-container">
-      <div className="category-crud-bar-container">
-        <Link to="/admin/category/create" className="btn-crud-add-link">
-          <button className="btn btn-primary text-white btn-crud-add">
-            adicionar
-          </button>
-        </Link>
-        <CategoryFilter />
-      </div>
-      {page?.content.map((item) => (
-        <p key={item.id}>{item.name}</p>
-      ))}
-    </div>
+    <Switch>
+      <Route path="/admin/categories" exact>
+        <CategoryList />
+      </Route>
+      <Route path="/admin/categories/:categorytId">
+        <CategoryForm />
+      </Route>
+    </Switch>
   );
-}
+};
 
-export default Categoies;
+export default Categories;

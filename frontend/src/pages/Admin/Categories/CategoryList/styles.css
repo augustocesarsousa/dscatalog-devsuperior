@@ -1,0 +1,13 @@
+.category-crud-container {
+  max-width: 960px;
+}
+
+.category-crud-bar-container {
+  margin-bottom: 40px;
+}
+
+@media (min-width: 768px) {
+  .category-filter-form {
+    display: flex;
+  }
+}

@@ -6,7 +6,6 @@ import Products from './Products';
 import './styles.css';
 import Users from './Users';
 
-
 const Admin = () => {
   return (
     <div className="admin-container">
