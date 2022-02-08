@@ -48,7 +48,7 @@ function CategoryList() {
         name: controlComponentsData.filterData.name,
       },
     };
-    console.log(controlComponentsData.filterData.name);
+
     requestBackend(config).then((response) => {
       setPage(response.data);
     });
@@ -70,7 +70,7 @@ function CategoryList() {
       </div>
       {page?.content.map((category) => (
         <div key={category.id}>
-          <CategoryCrudCard category={category} onDelete={() => {}} />
+          <CategoryCrudCard category={category} onDelete={getCategories} />
         </div>
       ))}
       <div className="row">

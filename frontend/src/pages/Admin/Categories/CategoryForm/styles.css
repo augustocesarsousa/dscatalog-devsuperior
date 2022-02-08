@@ -28,7 +28,6 @@
   .category-form-card-content {
     display: flex;
     justify-content: space-between;
-    align-items: center;
   }
 
   .category-form-card-input-container {

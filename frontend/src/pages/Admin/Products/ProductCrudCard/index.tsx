@@ -1,11 +1,11 @@
-import './styles.css';
-
-import ProductPrice from 'components/ProductPrice';
-import { Product } from 'types/product';
-import CategoryBadge from '../CategoryBadge';
-import { Link } from 'react-router-dom';
 import { AxiosRequestConfig } from 'axios';
+import ProductPrice from 'components/ProductPrice';
+import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import { Product } from 'types/product';
 import { requestBackend } from 'util/requests';
+import CategoryBadge from '../CategoryBadge';
+import './styles.css';
 
 type Props = {
   product: Product;
@@ -14,7 +14,7 @@ type Props = {
 
 const ProductCrudCard = ({ product, onDelete }: Props) => {
   const handleDelete = (productId: number) => {
-    if(!window.confirm("Você realmente quer deletar o produto?")){
+    if (!window.confirm('Você realmente quer deletar o produto?')) {
       return;
     }
 
@@ -26,6 +26,7 @@ const ProductCrudCard = ({ product, onDelete }: Props) => {
 
     requestBackend(config).then(() => {
       onDelete();
+      toast.info('Categoria deletada com sucesso!');
     });
   };
 
