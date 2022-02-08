@@ -2,24 +2,30 @@ package com.devsuperior.dscatalog.dto;
 
 import java.io.Serializable;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+
 import com.devsuperior.dscatalog.entities.Category;
 
-public class CategoryDTO implements Serializable{
-	
+public class CategoryDTO implements Serializable {
+
 	private static final long serialVersionUID = 1L;
 
 	private Long id;
+
+	@Size(min = 4, max = 60, message = "Campo deve ter entre 4 e 60 caracteres")
+	@NotBlank(message = "Campo obrigatório")
 	private String name;
-	
+
 	public CategoryDTO() {
-		
+
 	}
 
 	public CategoryDTO(Long id, String name) {
 		this.id = id;
 		this.name = name;
 	}
-	
+
 	public CategoryDTO(Category entity) {
 		this.id = entity.getId();
 		this.name = entity.getName();
@@ -40,6 +46,5 @@ public class CategoryDTO implements Serializable{
 	public void setName(String name) {
 		this.name = name;
 	}
-	
-	
+
 }
