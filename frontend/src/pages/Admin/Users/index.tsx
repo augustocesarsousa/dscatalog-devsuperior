@@ -3,12 +3,13 @@ import { useEffect, useState } from 'react';
 import { User } from 'types/user';
 import { SpringPage } from 'types/vendor/spring';
 import { requestBackend } from 'util/requests';
- 
+import UserFilter from './UserFilter';
+
 const Users = () => {
   const [page, setPage] = useState<SpringPage<User>>();
- 
+
   useEffect(() => {
-    const params : AxiosRequestConfig = {
+    const params: AxiosRequestConfig = {
       url: '/users',
       withCredentials: true,
       params: {
@@ -16,19 +17,20 @@ const Users = () => {
         size: 12,
       },
     };
- 
+
     requestBackend(params).then((response) => {
       setPage(response.data);
     });
   }, []);
- 
+
   return (
     <div>
+      <UserFilter onSubmitFilter={() => {}} />
       {page?.content.map((item) => (
         <p key={item.id}>{item.email}</p>
       ))}
     </div>
   );
 };
- 
+
 export default Users;
