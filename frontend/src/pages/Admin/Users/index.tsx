@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { User } from 'types/user';
 import { SpringPage } from 'types/vendor/spring';
 import { requestBackend } from 'util/requests';
+import UserCrudCard from './UserCrudCard';
 import UserFilter from './UserFilter';
 
 const Users = () => {
@@ -26,8 +27,8 @@ const Users = () => {
   return (
     <div>
       <UserFilter onSubmitFilter={() => {}} />
-      {page?.content.map((item) => (
-        <p key={item.id}>{item.email}</p>
+      {page?.content.map((user) => (
+        <UserCrudCard key={user.id} user={user} onDelete={() => {}} />
       ))}
     </div>
   );
