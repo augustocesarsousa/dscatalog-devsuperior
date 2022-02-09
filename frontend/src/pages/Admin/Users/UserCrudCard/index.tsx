@@ -1,8 +1,10 @@
 import { AxiosRequestConfig } from 'axios';
+import Badge from 'components/Badge';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { User } from 'types/user';
+import { formatRole } from 'util/formatters';
 import { requestBackend } from 'util/requests';
 import './styles.css';
 
@@ -37,6 +39,11 @@ function UserCrudCard({ user, onDelete }: Props) {
     <div className="user-crud-card-container base-card">
       <div className="user-crud-card-text-content">
         <h6 className="user-crud-card-text">{`${user.firstName} ${user.lastName}`}</h6>
+      </div>
+      <div className="user-crud-card-roles-container">
+        {user.roles.map((role) => (
+          <Badge name={formatRole(String(role.authority))} key={role.id} />
+        ))}
       </div>
       <div className="user-crud-card-buttons-content">
         <Link to={`/admin/users/${user.id}`}>

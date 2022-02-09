@@ -45,6 +45,7 @@ function UserList() {
       params: {
         page: controlComponentsData.activePage,
         size: 6,
+        sort: 'firstName',
         name: controlComponentsData.filterData.name,
       },
     };

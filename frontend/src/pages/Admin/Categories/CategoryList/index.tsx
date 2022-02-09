@@ -45,6 +45,7 @@ function CategoryList() {
       params: {
         page: controlComponentsData.activePage,
         size: 6,
+        sort: 'name',
         name: controlComponentsData.filterData.name,
       },
     };

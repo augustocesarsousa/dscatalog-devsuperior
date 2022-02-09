@@ -1,10 +1,10 @@
 import { AxiosRequestConfig } from 'axios';
+import Badge from 'components/Badge';
 import ProductPrice from 'components/ProductPrice';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { Product } from 'types/product';
 import { requestBackend } from 'util/requests';
-import CategoryBadge from '../CategoryBadge';
 import './styles.css';
 
 type Props = {
@@ -42,7 +42,7 @@ const ProductCrudCard = ({ product, onDelete }: Props) => {
         </div>
         <div className="product-crud-categories-container">
           {product.categories.map((categorie) => (
-            <CategoryBadge name={categorie.name} key={categorie.id} />
+            <Badge name={categorie.name} key={categorie.id} />
           ))}
         </div>
       </div>

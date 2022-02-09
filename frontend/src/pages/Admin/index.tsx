@@ -1,6 +1,7 @@
 import PrivateRoute from 'components/PrivateRoute';
 import { Switch } from 'react-router';
-import Categoies from './Categories';
+import { Role } from 'types/role';
+import Categories from './Categories';
 import Navbar from './Navbar';
 import Products from './Products';
 import './styles.css';
@@ -16,9 +17,12 @@ const Admin = () => {
             <Products />
           </PrivateRoute>
           <PrivateRoute path="/admin/categories">
-            <Categoies />
+            <Categories />
           </PrivateRoute>
-          <PrivateRoute path="/admin/users" roles={['ROLE_ADMIN']}>
+          <PrivateRoute
+            path="/admin/users"
+            roles={[{ authority: 'ROLE_ADMIN' } as Role]}
+          >
             <Users />
           </PrivateRoute>
         </Switch>
