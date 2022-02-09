@@ -3,6 +3,15 @@
   max-width: 960px;
 }
 
+.category-form-card-title {
+  font-size: 22px;
+  font-weight: bold;
+  letter-spacing: -0.015em;
+  text-transform: uppercase;
+  color: #263238;
+  margin-bottom: 30px;
+}
+
 .category-form-card-input-container {
   margin-bottom: 15px;
 }

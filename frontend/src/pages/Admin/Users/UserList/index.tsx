@@ -20,7 +20,7 @@ function UserList() {
   const [controlComponentsData, setControlComponentsData] =
     useState<ControlComponentsData>({
       activePage: 0,
-      filterData: { name: '' },
+      filterData: { name: '', role: null },
     });
 
   const handlePageChange = (pageNumber: number) => {
@@ -46,7 +46,8 @@ function UserList() {
         page: controlComponentsData.activePage,
         size: 6,
         sort: 'firstName',
-        name: controlComponentsData.filterData.name,
+        firstName: controlComponentsData.filterData.name,
+        roleId: controlComponentsData.filterData.role?.id,
       },
     };
 

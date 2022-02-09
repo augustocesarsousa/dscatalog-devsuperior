@@ -1,8 +1,21 @@
 package com.devsuperior.dscatalog.services;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
 import javax.persistence.EntityNotFoundException;
+
+import com.devsuperior.dscatalog.dto.RoleDTO;
+import com.devsuperior.dscatalog.dto.UserDTO;
+import com.devsuperior.dscatalog.dto.UserInsertDTO;
+import com.devsuperior.dscatalog.dto.UserUpdateDTO;
+import com.devsuperior.dscatalog.entities.Role;
+import com.devsuperior.dscatalog.entities.User;
+import com.devsuperior.dscatalog.repositories.RoleRepository;
+import com.devsuperior.dscatalog.repositories.UserRepository;
+import com.devsuperior.dscatalog.services.exceptions.DataBaseException;
+import com.devsuperior.dscatalog.services.exceptions.ResourceNotFoundException;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,19 +31,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.devsuperior.dscatalog.dto.RoleDTO;
-import com.devsuperior.dscatalog.dto.UserDTO;
-import com.devsuperior.dscatalog.dto.UserInsertDTO;
-import com.devsuperior.dscatalog.dto.UserUpdateDTO;
-import com.devsuperior.dscatalog.entities.Role;
-import com.devsuperior.dscatalog.entities.User;
-import com.devsuperior.dscatalog.repositories.RoleRepository;
-import com.devsuperior.dscatalog.repositories.UserRepository;
-import com.devsuperior.dscatalog.services.exceptions.DataBaseException;
-import com.devsuperior.dscatalog.services.exceptions.ResourceNotFoundException;
-
 @Service
-public class UserService implements UserDetailsService{
+public class UserService implements UserDetailsService {
 
 	private static Logger logger = LoggerFactory.getLogger(UserService.class);
 
@@ -44,16 +46,18 @@ public class UserService implements UserDetailsService{
 	private RoleRepository roleRepository;
 
 	@Transactional(readOnly = true)
-	public Page<UserDTO> findAllPaged(Pageable pageable){
-		Page<User> list = repository.findAll(pageable);		
-		return list.map(x -> new UserDTO(x));		
+	public Page<UserDTO> findAllPaged(Long roleId, String firstName, Pageable pageable) {
+		List<Role> roles = (roleId == 0) ? null : Arrays.asList(roleRepository.getOne(roleId));
+		Page<User> page = repository.find(roles, firstName, pageable);
+		repository.findUsersWithRoles(page.getContent());
+		return page.map(x -> new UserDTO(x, x.getRoles()));
 	}
 
 	@Transactional(readOnly = true)
 	public UserDTO findById(Long id) {
 		Optional<User> obj = repository.findById(id);
 		User entity = obj.orElseThrow(() -> new ResourceNotFoundException("Usuário não encotrado!"));
-		return new UserDTO(entity);
+		return new UserDTO(entity, entity.getRoles());
 	}
 
 	@Transactional
@@ -71,28 +75,28 @@ public class UserService implements UserDetailsService{
 			User entity = repository.getOne(id);
 			copyDtoToEntity(dto, entity);
 			entity = repository.save(entity);
-			return new UserDTO(entity);			
-		}catch(EntityNotFoundException e) {
+			return new UserDTO(entity);
+		} catch (EntityNotFoundException e) {
 			throw new ResourceNotFoundException("Id not found = " + id);
-		}	
+		}
 	}
 
 	public void delete(Long id) {
 		try {
-			repository.deleteById(id);			
-		}catch(EmptyResultDataAccessException e) {
+			repository.deleteById(id);
+		} catch (EmptyResultDataAccessException e) {
 			throw new ResourceNotFoundException("Id not found = " + id);
-		}catch(DataIntegrityViolationException e) {
+		} catch (DataIntegrityViolationException e) {
 			throw new DataBaseException("Integrity violation");
 		}
-	}	
-	
+	}
+
 	private void copyDtoToEntity(UserDTO dto, User entity) {
-		
+
 		entity.setFirstName(dto.getFirstName());
 		entity.setLastName(dto.getLastName());
 		entity.setEmail(dto.getEmail());
-		
+
 		entity.getRoles().clear();
 		for (RoleDTO roleDTO : dto.getRoles()) {
 			Role role = roleRepository.getOne(roleDTO.getId());
@@ -103,12 +107,12 @@ public class UserService implements UserDetailsService{
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		User user = repository.findByEmail(username);
-		if(user == null){
+		if (user == null) {
 			logger.error("User not found: " + username);
 			throw new UsernameNotFoundException("Email não encontrado");
 		}
 		logger.info("User found" + username);
 		return user;
 	}
-	
+
 }

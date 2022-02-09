@@ -66,6 +66,7 @@ function CategoryForm() {
 
   return (
     <div className="category-form-card-container base-card">
+      <h1 className="category-form-card-title">Dados da categoria</h1>
       <form
         className="category-form-card-content"
         onSubmit={handleSubmit(onSubmit)}

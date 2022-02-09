@@ -38,7 +38,7 @@ function UserCrudCard({ user, onDelete }: Props) {
   return (
     <div className="user-crud-card-container base-card">
       <div className="user-crud-card-text-content">
-        <h6 className="user-crud-card-text">{`${user.firstName} ${user.lastName}`}</h6>
+        <h6 className="user-crud-card-text">{`${user.firstName}`}</h6>
       </div>
       <div className="user-crud-card-roles-container">
         {user.roles.map((role) => (
