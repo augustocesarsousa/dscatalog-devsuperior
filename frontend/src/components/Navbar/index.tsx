@@ -69,6 +69,15 @@ function Navbar() {
                 ADMIN
               </NavLink>
             </li>
+            <li className="li-login-logout">
+              {authContextData.authenticated ? (
+                <Link to="#" onClick={handleLogoutClick}>
+                  SAIR
+                </Link>
+              ) : (
+                <></>
+              )}
+            </li>
           </ul>
         </div>
 
@@ -79,11 +88,11 @@ function Navbar() {
                 {authContextData.tokenData?.user_name}
               </span>
               <Link to="#" onClick={handleLogoutClick}>
-                LOGOUT
+                SAIR
               </Link>
             </>
           ) : (
-            <Link to="/admin/auth">LOGIN</Link>
+            <Link to="/admin/auth">ENTRAR</Link>
           )}
         </div>
       </div>
