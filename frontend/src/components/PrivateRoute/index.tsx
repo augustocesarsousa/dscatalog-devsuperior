@@ -1,11 +1,11 @@
 import { Redirect, Route } from 'react-router-dom';
-import { Role } from 'types/role';
+import { RoleAuth } from 'types/role';
 import { hasAnyRoles, isAuthenticated } from 'util/auth';
 
 type Props = {
   children: React.ReactNode;
   path: string;
-  roles?: Role[];
+  roles?: RoleAuth[];
 };
 
 const PrivateRoute = ({ children, path, roles = [] }: Props) => {

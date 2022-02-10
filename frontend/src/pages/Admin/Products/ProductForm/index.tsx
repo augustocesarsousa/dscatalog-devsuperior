@@ -14,7 +14,7 @@ type UrlParams = {
   productId: string;
 };
 
-const Form = () => {
+const ProductForm = () => {
   const { productId } = useParams<UrlParams>();
 
   const isEditing = productId !== 'create';
@@ -216,4 +216,4 @@ const Form = () => {
   );
 };
 
-export default Form;
+export default ProductForm;

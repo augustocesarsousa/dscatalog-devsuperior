@@ -1,6 +1,6 @@
-// export type Role = 'ROLE_OPERATOR' | 'ROLE_ADMIN';
+export type RoleAuth = 'ROLE_OPERATOR' | 'ROLE_ADMIN';
 
 export type Role = {
-  id: number;
+  id?: number;
   authority: string;
 };

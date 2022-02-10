@@ -16,7 +16,7 @@ export default function Navbar() {
             <p>Categorias</p>
           </NavLink>
         </li>
-        {hasAnyRoles([{ id: 0, authority: 'ROLE_ADMIN' }]) && (
+        {hasAnyRoles(['ROLE_ADMIN']) && (
           <li>
             <NavLink to="/admin/users" className="admin-nav-item">
               <p>Usuários</p>

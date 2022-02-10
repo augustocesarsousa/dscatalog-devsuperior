@@ -4,7 +4,7 @@ import { Router, useParams } from 'react-router-dom';
 import selectEvent from 'react-select-event';
 import { ToastContainer } from 'react-toastify';
 import history from 'util/history';
-import Form from '../Form';
+import ProductForm from '../ProductForm';
 import { productResponse, server } from './fixtures';
 
 beforeAll(() => server.listen());
@@ -27,7 +27,7 @@ describe('product form create tests', () => {
     render(
       <Router history={history}>
         <ToastContainer />
-        <Form />
+        <ProductForm />
       </Router>
     );
 
@@ -61,7 +61,7 @@ describe('product form create tests', () => {
   test('should show 5 validation messages when just clicking submit', async () => {
     render(
       <Router history={history}>
-        <Form />
+        <ProductForm />
       </Router>
     );
 
@@ -78,7 +78,7 @@ describe('product form create tests', () => {
   test('should clear validation messages when filling out the form correctly', async () => {
     render(
       <Router history={history}>
-        <Form />
+        <ProductForm />
       </Router>
     );
 
@@ -125,7 +125,7 @@ describe('product form update tests', () => {
     render(
       <Router history={history}>
         <ToastContainer />
-        <Form />
+        <ProductForm />
       </Router>
     );
 
@@ -141,7 +141,7 @@ describe('product form update tests', () => {
       expect(imgUrlInput).toHaveValue(productResponse.imgUrl);
       expect(descriptionInput).toHaveValue(productResponse.description);
 
-      const ids = productResponse.categories.map(x => String(x.id));
+      const ids = productResponse.categories.map((x) => String(x.id));
       expect(formElement).toHaveFormValues({ categories: ids });
     });
 

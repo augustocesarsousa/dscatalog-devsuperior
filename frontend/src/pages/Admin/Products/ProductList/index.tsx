@@ -14,7 +14,7 @@ type ControlComponentsData = {
   filterData: ProductFilterData;
 };
 
-const List = () => {
+const ProductList = () => {
   const [page, setPage] = useState<SpringPage<Product>>();
 
   const [controlComponentsData, setControlComponentsData] =
@@ -85,4 +85,4 @@ const List = () => {
   );
 };
 
-export default List;
+export default ProductList;

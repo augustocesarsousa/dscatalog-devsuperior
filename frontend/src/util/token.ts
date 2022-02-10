@@ -1,11 +1,11 @@
 import jwtDecode from 'jwt-decode';
-import { Role } from 'types/role';
+import { RoleAuth } from 'types/role';
 import { getAuthdata } from './storage';
 
 export type TokenData = {
   exp: number;
   user_name: string;
-  authorities: Role[];
+  authorities: RoleAuth[];
 };
 
 export const getTokenData = (): TokenData | undefined => {
