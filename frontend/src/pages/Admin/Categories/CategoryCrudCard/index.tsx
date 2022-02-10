@@ -51,14 +51,14 @@ function CategoryCrudCard({ category, onDelete }: Props) {
       <div className="category-crud-card-text-content">
         <h6 className="category-crud-card-text">{category.name}</h6>
       </div>
-      <div className="category-crud-card-buttons-content">
+      <div className="category-crud-card-buttons-container">
         <Link to={`/admin/categories/${category.id}`}>
           <button className="btn btn-outline-secondary category-crud-card-button">
             editar
           </button>
         </Link>
         <button
-          className="btn btn-outline-danger category-crud-card-button category-crud-card-button-first"
+          className="btn btn-outline-danger category-crud-card-button"
           onClick={() => handleDelete(category.id)}
         >
           excluir

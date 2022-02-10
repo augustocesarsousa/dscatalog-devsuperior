@@ -86,11 +86,11 @@ function UserForm() {
   };
 
   return (
-    <div className="user-crud-form-container">
-      <div className="base-card user-crud-form-content">
-        <h1 className="user-crud-form-title">Dados do usuário</h1>
+    <div className="user-form-card-container">
+      <div className="base-card user-form-card-content">
+        <h1 className="user-form-card-title">Dados do usuário</h1>
         <form action="" onSubmit={handleSubmit(onSubmit)}>
-          <div className="user-crud-form-inputs-container">
+          <div className="user-form-card-inputs-container">
             <div className="margin-bottom-30">
               <Controller
                 name="roles"
@@ -100,7 +100,7 @@ function UserForm() {
                   <Select
                     {...field}
                     options={selectRoles}
-                    classNamePrefix="user-crud-select"
+                    classNamePrefix="user-form-card-select"
                     isMulti
                     getOptionLabel={(role: Role) => formatRole(role.authority)}
                     getOptionValue={(role: Role) => String(role.id)}
@@ -169,10 +169,12 @@ function UserForm() {
               </div>
             </div>
           </div>
-          <div className="user-crud-form-buttons-container">
-            <button className="btn btn-primary user-crud-button">salvar</button>
+          <div className="user-form-card-buttons-container">
+            <button className="btn btn-primary user-form-card-button">
+              salvar
+            </button>
             <button
-              className="btn btn-outline-danger user-crud-button"
+              className="btn btn-outline-danger user-form-card-button"
               onClick={handleCancel}
             >
               cancelar

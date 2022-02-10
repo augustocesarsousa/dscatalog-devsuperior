@@ -3,12 +3,6 @@
   margin-bottom: 20px;
 }
 
-.user-crud-card-buttons-container {
-  padding: 0 20px;
-  display: flex;
-  justify-content: space-between;
-}
-
 .user-crud-card-text-content {
   margin-bottom: 15px;
   border-bottom: 1px solid #e1e1e1;
@@ -24,15 +18,25 @@
   flex-wrap: wrap;
 }
 
+.user-crud-card-buttons-container {
+  display: flex;
+  justify-content: space-between;
+}
+
 .user-crud-card-button {
-  width: 100%;
-  height: 40px;
-  margin-bottom: 10px;
   font-weight: bold;
   font-size: 14px;
   letter-spacing: -0.015em;
   text-transform: uppercase;
   border-radius: 10px;
+  width: 110px;
+  height: 40px;
+}
+
+@media (min-width: 576px) {
+  .user-crud-card-button {
+    width: 150px;
+  }
 }
 
 @media (min-width: 768px) {
@@ -64,11 +68,6 @@
 
   .user-crud-card-buttons-content {
     display: flex;
-  }
-
-  .user-crud-card-button {
-    margin-bottom: 0;
-    width: 140px;
   }
 
   .user-crud-card-button:nth-child(1) {

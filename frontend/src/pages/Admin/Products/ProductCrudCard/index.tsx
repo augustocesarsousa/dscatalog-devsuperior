@@ -47,17 +47,17 @@ const ProductCrudCard = ({ product, onDelete }: Props) => {
         </div>
       </div>
       <div className="product-crud-card-buttons-container">
-        <button
-          onClick={() => handleDelete(product.id)}
-          className="btn btn-outline-danger product-crud-card-button product-crud-card-button-first"
-        >
-          excluir
-        </button>
         <Link to={`/admin/products/${product.id}`}>
           <button className="btn btn-outline-secondary product-crud-card-button">
             editar
           </button>
         </Link>
+        <button
+          onClick={() => handleDelete(product.id)}
+          className="btn btn-outline-danger product-crud-card-button"
+        >
+          excluir
+        </button>
       </div>
     </div>
   );

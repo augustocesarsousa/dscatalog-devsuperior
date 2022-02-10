@@ -47,7 +47,7 @@ function UserCrudCard({ user, onDelete }: Props) {
           <Badge name={formatRole(String(role.authority))} key={role.id} />
         ))}
       </div>
-      <div className="user-crud-card-buttons-content">
+      <div className="user-crud-card-buttons-container">
         <Link to={`/admin/users/${user.id}`}>
           <button className="btn btn-outline-secondary user-crud-card-button">
             editar

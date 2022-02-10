@@ -33,6 +33,10 @@
   border-radius: 10px;
 }
 
+.category-form-card-button:first-child {
+  color: #fff;
+}
+
 @media (min-width: 768px) {
   .category-form-card-button {
     width: 200px;
