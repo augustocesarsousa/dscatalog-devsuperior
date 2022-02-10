@@ -7,6 +7,7 @@ import java.util.Optional;
 import javax.persistence.EntityNotFoundException;
 
 import com.devsuperior.dscatalog.dto.RoleDTO;
+import com.devsuperior.dscatalog.dto.UserChangePasswordDTO;
 import com.devsuperior.dscatalog.dto.UserDTO;
 import com.devsuperior.dscatalog.dto.UserInsertDTO;
 import com.devsuperior.dscatalog.dto.UserUpdateDTO;
@@ -78,6 +79,18 @@ public class UserService implements UserDetailsService {
 			return new UserDTO(entity);
 		} catch (EntityNotFoundException e) {
 			throw new ResourceNotFoundException("Id not found = " + id);
+		}
+	}
+
+	@Transactional
+	public UserDTO changePassword(String email, UserChangePasswordDTO dto) {
+		try {
+			User entity = repository.findByEmail(email);
+			entity.setPassword(passwordEncoder.encode(dto.getPassword()));
+			entity = repository.save(entity);
+			return new UserDTO(entity);
+		} catch (EntityNotFoundException e) {
+			throw new ResourceNotFoundException("Id not found = " + email);
 		}
 	}
 

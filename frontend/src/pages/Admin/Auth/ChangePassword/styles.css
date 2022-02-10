@@ -1,0 +1,43 @@
+.change-password-container {
+  padding: 20px;
+  font-size: 16px;
+}
+
+.change-password-container h2 {
+  font-size: 1.8em;
+  font-weight: normal;
+  text-align: center;
+  letter-spacing: -0.015em;
+  color: #263238;
+  text-transform: uppercase;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.change-password-buttons-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 50px;
+  margin-bottom: 10px;
+}
+
+.change-password-button {
+  width: 100px;
+  height: 50px;
+  margin-bottom: 10px;
+  font-weight: bold;
+  font-size: 14px;
+  letter-spacing: -0.015em;
+  text-transform: uppercase;
+  border-radius: 10px;
+}
+
+.change-password-button:first-child {
+  color: #fff;
+}
+
+@media (min-width: 400px) {
+  .change-password-button {
+    width: 150px;
+  }
+}

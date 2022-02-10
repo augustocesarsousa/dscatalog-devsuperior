@@ -26,12 +26,18 @@ const Login = () => {
   const { authContextData, setAuthContextData } = useContext(AuthContext);
 
   const [hasError, setHasError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
 
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<CredentialsDTO>();
+
+  const setErrors = (has: boolean, message: string) => {
+    setHasError(has);
+    setErrorMessage(message);
+  };
 
   const history = useHistory();
 
@@ -47,16 +53,17 @@ const Login = () => {
         history.replace(from);
       })
       .catch((error) => {
-        setHasError(true);
-        console.log('ERRO ', error);
+        error.response === undefined
+          ? setErrors(true, 'Erro ao fazer a requisição!')
+          : setErrors(true, 'Usuário ou senha não conferem!');
       });
   };
 
   return (
     <div className="base-card login-card">
-      <h1>LOGIN</h1>
+      <h2>login</h2>
       {hasError && (
-        <div className="alert alert-danger">Erro ao fazer requisição!</div>
+        <div className="alert alert-danger mb-4">{errorMessage}</div>
       )}
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="mb-4">
@@ -88,7 +95,7 @@ const Login = () => {
             className={`form-control base-input ${
               errors.password ? 'is-invalid' : ''
             }`}
-            placeholder="Password"
+            placeholder="Senha"
             name="password"
           />
           <div className="invalid-feedback d-block">

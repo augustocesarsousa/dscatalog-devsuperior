@@ -4,6 +4,7 @@ import java.net.URI;
 
 import javax.validation.Valid;
 
+import com.devsuperior.dscatalog.dto.UserChangePasswordDTO;
 import com.devsuperior.dscatalog.dto.UserDTO;
 import com.devsuperior.dscatalog.dto.UserInsertDTO;
 import com.devsuperior.dscatalog.dto.UserUpdateDTO;
@@ -58,6 +59,13 @@ public class UserResource {
 	@PutMapping(value = "/{id}")
 	public ResponseEntity<UserDTO> update(@PathVariable Long id, @Valid @RequestBody UserUpdateDTO dto) {
 		UserDTO newDto = service.update(id, dto);
+		return ResponseEntity.ok().body(newDto);
+	}
+
+	@PutMapping(value = "/change-password/{email}")
+	public ResponseEntity<UserDTO> changePassword(@PathVariable String email,
+			@Valid @RequestBody UserChangePasswordDTO dto) {
+		UserDTO newDto = service.changePassword(email, dto);
 		return ResponseEntity.ok().body(newDto);
 	}
 

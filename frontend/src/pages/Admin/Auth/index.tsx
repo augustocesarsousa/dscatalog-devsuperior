@@ -1,5 +1,6 @@
 import { ReactComponent as AuthImage } from 'assets/images/auth-image.svg';
 import { Route, Switch } from 'react-router-dom';
+import ChangePassword from './ChangePassword';
 import Login from './Login';
 import './styles.css';
 
@@ -20,14 +21,8 @@ export default function Auth() {
             <Route path="/admin/auth/login">
               <Login />
             </Route>
-            {/* <Route path="/admin/auth/signup">
-              <h1>Card Signup</h1>
-            </Route>
-            <Route path="/admin/auth/recover">
-              <h1>Card Recover</h1>
-            </Route> */}
             <Route path="/admin/auth/changePassword">
-              <h1>Change password</h1>
+              <ChangePassword />
             </Route>
           </Switch>
         </div>
