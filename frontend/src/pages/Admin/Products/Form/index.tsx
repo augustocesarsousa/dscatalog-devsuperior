@@ -65,19 +65,16 @@ const Form = () => {
 
     requestBackend(config)
       .then(() => {
-        if (isEditing) {
-          toast.info('Produto editado com sucesso!');
-        } else {
-          toast.info('Produto cadastrado com sucesso!');
-        }
+        isEditing
+          ? toast.info('Produto editado com sucesso!')
+          : toast.info('Produto cadastrado com sucesso!');
+
         history.push('/admin/products');
       })
       .catch(() => {
-        if (isEditing) {
-          toast.error('Erro ao editar o produto!');
-        } else {
-          toast.error('Erro ao cadastrar o produto!');
-        }
+        isEditing
+          ? toast.error('Erro ao editar o produto!')
+          : toast.error('Erro ao cadastrar o produto!');
       });
   };
 
@@ -110,7 +107,9 @@ const Form = () => {
                 </div>
               </div>
               <div className="margin-bottom-30">
-                <label htmlFor="categories" className='d-none'>Categorias</label>
+                <label htmlFor="categories" className="d-none">
+                  Categorias
+                </label>
                 <Controller
                   name="categories"
                   rules={{ required: true }}
@@ -125,7 +124,7 @@ const Form = () => {
                       getOptionValue={(category: Category) =>
                         String(category.id)
                       }
-                      inputId='categories'
+                      inputId="categories"
                       placeholder="Categorias"
                     />
                   )}

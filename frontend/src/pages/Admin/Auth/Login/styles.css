@@ -21,16 +21,18 @@
   display: block;
   margin-bottom: 30px;
 }
-.login-link-register {
-  font-weight: bold;
+
+.login-link-change-password {
   font-size: 1em;
-  text-align: center;
   letter-spacing: -0.015em;
-  text-decoration-line: underline;
   color: #407bff;
-  margin-left: 10px;
+  display: block;
+  text-align: right;
+  margin-bottom: 30px;
 }
+
 .login-submit {
+  margin-top: 50px;
   margin-bottom: 10px;
 }
 .not-registered {
@@ -49,7 +51,7 @@
   .login-card {
     padding: 30px;
   }
-  
+
   .login-card h1 {
     font-size: 2.5em;
     margin-top: 70px;
@@ -71,5 +73,4 @@
   .login-link-recover {
     margin-bottom: 30px;
   }
-
 }

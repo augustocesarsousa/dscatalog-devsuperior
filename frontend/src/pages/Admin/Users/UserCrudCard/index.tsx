@@ -14,6 +14,8 @@ type Props = {
 };
 
 function UserCrudCard({ user, onDelete }: Props) {
+  user.roles.sort((a, b) => a.authority.localeCompare(b.authority));
+
   const handleDelete = (userId: number) => {
     if (!window.confirm('Você realmente quer deletar o usuário?')) {
       return;
