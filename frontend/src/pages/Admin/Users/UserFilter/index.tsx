@@ -41,11 +41,13 @@ function UserFilter({ onSubmitFilter }: Props) {
   };
 
   useEffect(() => {
-    requestBackend({ url: '/roles', withCredentials: true }).then(
-      (response) => {
-        setSelectRoles(response.data.content);
-      }
-    );
+    requestBackend({
+      url: '/roles',
+      params: { sort: 'authority' },
+      withCredentials: true,
+    }).then((response) => {
+      setSelectRoles(response.data.content);
+    });
   }, []);
 
   return (

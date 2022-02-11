@@ -45,7 +45,7 @@ const Catalog = () => {
       url: `/products`,
       params: {
         page: controlComponentsData.activePage,
-        size: 4,
+        size: 8,
         name: controlComponentsData.filterData.name,
         categoryId: controlComponentsData.filterData.category?.id,
       },

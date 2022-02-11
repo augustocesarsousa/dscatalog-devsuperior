@@ -1,10 +1,10 @@
-import './styles.css';
 import { ReactComponent as SearchIcon } from 'assets/images/search-icon.svg';
-import { Category } from 'types/catecory';
+import { useEffect, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import Select from 'react-select';
-import { useEffect, useState } from 'react';
+import { Category } from 'types/catecory';
 import { requestBackend } from 'util/requests';
+import './styles.css';
 
 export type ProductFilterData = {
   name: string;
@@ -40,9 +40,11 @@ const ProductFilter = ({ onSubmitFilter }: Props) => {
   };
 
   useEffect(() => {
-    requestBackend({ url: '/categories' }).then((response) => {
-      setSelectCategories(response.data.content);
-    });
+    requestBackend({ url: '/categories', params: { sort: 'name' } }).then(
+      (response) => {
+        setSelectCategories(response.data.content);
+      }
+    );
   }, []);
 
   return (
