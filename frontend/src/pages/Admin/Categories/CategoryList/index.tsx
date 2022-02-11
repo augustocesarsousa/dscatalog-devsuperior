@@ -1,4 +1,5 @@
 import { AxiosRequestConfig } from 'axios';
+import DotsLoader from 'components/DotsLoader';
 import Pagination from 'components/Pagination';
 import React, { useCallback, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
@@ -16,6 +17,7 @@ type ControlComponentsData = {
 
 function CategoryList() {
   const [page, setPage] = useState<SpringPage<Category>>();
+  const [isLoading, setIsLoading] = useState(false);
 
   const [controlComponentsData, setControlComponentsData] =
     useState<ControlComponentsData>({
@@ -50,9 +52,15 @@ function CategoryList() {
       },
     };
 
-    requestBackend(config).then((response) => {
-      setPage(response.data);
-    });
+    setIsLoading(true);
+
+    requestBackend(config)
+      .then((response) => {
+        setPage(response.data);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
   }, [controlComponentsData]);
 
   useEffect(() => {
@@ -69,11 +77,17 @@ function CategoryList() {
         </Link>
         <CategoryFilter onSubmitFilter={handleSubmitFilter} />
       </div>
-      {page?.content.map((category) => (
-        <div key={category.id}>
-          <CategoryCrudCard category={category} onDelete={getCategories} />
+      {isLoading ? (
+        <div className="loader-posicion">
+          <DotsLoader />
         </div>
-      ))}
+      ) : (
+        page?.content.map((category) => (
+          <div key={category.id}>
+            <CategoryCrudCard category={category} onDelete={getCategories} />
+          </div>
+        ))
+      )}
       <div className="row">
         <Pagination
           pageCount={page ? page?.totalPages : 0}

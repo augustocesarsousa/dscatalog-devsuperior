@@ -1,4 +1,5 @@
 import { AxiosRequestConfig } from 'axios';
+import DotsLoader from 'components/DotsLoader';
 import Pagination from 'components/Pagination';
 import React, { useCallback, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
@@ -16,6 +17,7 @@ type ControlComponentsData = {
 
 function UserList() {
   const [page, setPage] = useState<SpringPage<User>>();
+  const [isLoading, setIsLoading] = useState(false);
 
   const [controlComponentsData, setControlComponentsData] =
     useState<ControlComponentsData>({
@@ -51,9 +53,15 @@ function UserList() {
       },
     };
 
-    requestBackend(config).then((response) => {
-      setPage(response.data);
-    });
+    setIsLoading(true);
+
+    requestBackend(config)
+      .then((response) => {
+        setPage(response.data);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
   }, [controlComponentsData]);
 
   useEffect(() => {
@@ -70,11 +78,17 @@ function UserList() {
         </Link>
         <UserFilter onSubmitFilter={handleSubmitFilter} />
       </div>
-      {page?.content.map((user) => (
-        <div key={user.id}>
-          <UserCrudCard user={user} onDelete={getUsers} />
+      {isLoading ? (
+        <div className="loader-posicion">
+          <DotsLoader />
         </div>
-      ))}
+      ) : (
+        page?.content.map((user) => (
+          <div key={user.id}>
+            <UserCrudCard user={user} onDelete={getUsers} />
+          </div>
+        ))
+      )}
       <div className="row">
         <Pagination
           pageCount={page ? page?.totalPages : 0}

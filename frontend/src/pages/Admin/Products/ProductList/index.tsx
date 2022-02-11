@@ -1,4 +1,5 @@
 import { AxiosRequestConfig } from 'axios';
+import DotsLoader from 'components/DotsLoader';
 import Pagination from 'components/Pagination';
 import ProductFilter, { ProductFilterData } from 'components/ProductFilter';
 import ProductCrudCard from 'pages/Admin/Products/ProductCrudCard';
@@ -16,6 +17,7 @@ type ControlComponentsData = {
 
 const ProductList = () => {
   const [page, setPage] = useState<SpringPage<Product>>();
+  const [isLoading, setIsLoading] = useState(false);
 
   const [controlComponentsData, setControlComponentsData] =
     useState<ControlComponentsData>({
@@ -49,9 +51,15 @@ const ProductList = () => {
       },
     };
 
-    requestBackend(config).then((response) => {
-      setPage(response.data);
-    });
+    setIsLoading(true);
+
+    requestBackend(config)
+      .then((response) => {
+        setPage(response.data);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
   }, [controlComponentsData]);
 
   useEffect(() => {
@@ -69,11 +77,17 @@ const ProductList = () => {
         <ProductFilter onSubmitFilter={handleSubmitFilter} />
       </div>
       <div className="row">
-        {page?.content.map((product) => (
-          <div className="col-sm-6 col-md-12" key={product.id}>
-            <ProductCrudCard product={product} onDelete={getProducts} />
+        {isLoading ? (
+          <div className="loader-posicion">
+            <DotsLoader />
           </div>
-        ))}
+        ) : (
+          page?.content.map((product) => (
+            <div className="col-sm-6 col-md-12" key={product.id}>
+              <ProductCrudCard product={product} onDelete={getProducts} />
+            </div>
+          ))
+        )}
       </div>
       <Pagination
         forcePage={page?.number}
