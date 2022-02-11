@@ -1,4 +1,5 @@
 .catalog-container {
+  height: calc(100vh - 70px);
   font-size: 18px;
 }
 

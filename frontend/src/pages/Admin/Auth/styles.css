@@ -1,4 +1,5 @@
 .auth-container {
+  height: calc(100vh - 70px);
   display: flex;
   justify-content: center;
 }
@@ -62,5 +63,11 @@
 
   .auth-form-container {
     width: 400px;
+  }
+}
+
+@media (min-width: 1400px) {
+  .auth-container {
+    height: calc(100vh - 150px);
   }
 }

@@ -1,9 +1,11 @@
 .home-container {
+  height: calc(100vh - 70px);
   padding: 10px;
   font-size: 20px;
   text-align: center;
   display: flex;
   justify-content: center;
+  flex: 1;
 }
 
 .home-card {
@@ -137,6 +139,9 @@
 }
 
 @media (min-width: 1400px) {
+  .home-container {
+    height: calc(100vh - 150px);
+  }
   .home-image-container svg {
     width: 480px;
   }

@@ -1,11 +1,11 @@
+import Footer from 'components/Footer';
 import Navbar from 'components/Navbar';
 import Admin from 'pages/Admin';
 import Auth from 'pages/Admin/Auth';
 import Catalog from 'pages/Catalog';
 import Home from 'pages/Home';
 import ProductDetails from 'pages/ProductDetails';
-
-import { Router, Switch, Route, Redirect } from 'react-router-dom';
+import { Redirect, Route, Router, Switch } from 'react-router-dom';
 import history from 'util/history';
 
 const Routes = () => (
@@ -31,6 +31,7 @@ const Routes = () => (
           <Admin />
         </Route>
       </Switch>
+      <Footer />
     </Router>
   </div>
 );
