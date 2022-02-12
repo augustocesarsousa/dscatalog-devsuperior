@@ -1,6 +1,6 @@
 # DS Catalog
 
-Este projeto foi desenvolvido ao decorrer do curso Spring React da <a href="https://devsuperior.com.br/" target="_blank">DevSuperior</a>, ele consiste em um catálogo de produtos implementando as tecnologias mais utilizadas no mercado atual, abaixo segue a uma descrição resumida das tecnologias:
+Este projeto foi desenvolvido ao decorrer do curso Spring React da <a href="https://devsuperior.com.br/" target="_blank">DevSuperior</a>, ele consiste em um catálogo de produtos implementando as tecnologias mais utilizadas no mercado atual, abaixo segue uma descrição resumida das tecnologias:
 
 ## **Backend**
 
@@ -120,47 +120,47 @@ Este projeto foi desenvolvido ao decorrer do curso Spring React da <a href="http
 
 1. Página home
 
-[![Home page](/images/01-home-page.png)]
+![Home page](/images/01-home-page.png)
 
 2. Página de login
 
-[![Login page](/images/02-login-page.png)]
+![Login page](/images/02-login-page.png)
 
 3. Página alteração de senha
 
-[![Change password page](/images/03-change-password-page.png)]
+![Change password page](/images/03-change-password-page.png)
 
 4. Catálogo de produtos
 
-[![Catalog page](/images/04-catalog-page.png)]
+![Catalog page](/images/04-catalog-page.png)
 
 5. Detalhes do produto
 
-[![Catalog page, product details](/images/05-catalog-page-product-details.png)]
+![Catalog page, product details](/images/05-catalog-page-product-details.png)
 
 6. Página de administração de produtos
 
-[![Admin page, products](/images/06-admin-page-products.png)]
+![Admin page, products](/images/06-admin-page-products.png)
 
 7. Formulário de criação/alteração de produtos
 
-[![Admin page, product form](/images/07-admin-page-products-form.png)]
+![Admin page, product form](/images/07-admin-page-products-form.png)
 
 8. Página de administração de categorias
 
-[![Admin page, categories](/images/08-admin-page-category-list.png)]
+![Admin page, categories](/images/08-admin-page-category-list.png)
 
 9. Formulário de criação/alteração de categorias
 
-[![Admin page, category form](/images/09-admin-page-category-form.png)]
+![Admin page, category form](/images/09-admin-page-category-form.png)
 
 10. Página de administração de usuários
 
-[![Admin page, users](/images/10-admin-page-user-list.png)]
+![Admin page, users](/images/10-admin-page-user-list.png)
 
 11. Formulário de criação/alteração de usuários
 
-[![Admin page, user form](/images/11-admin-page-user-form.png)]
+![Admin page, user form](/images/11-admin-page-user-form.png)
 
 ## Executando o projeto
 
