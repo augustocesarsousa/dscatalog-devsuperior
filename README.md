@@ -1,6 +1,6 @@
 # DS Catalog
 
-Este projeto foi desenvolvido ao decorrer do curso Spring React da <a href="https://devsuperior.com.br/" target="_blank">DevSuperior</a>, ele consiste em um catálogo de produtos implementando as tecnologias mais utilizadas no mercado atual, abaixo segue a uma descrição resumida das tecnologias:
+Este projeto foi desenvolvido ao decorrer do curso Spring React da <a href="https://devsuperior.com.br/" target="_blank">DevSuperior</a>, ele consiste em um catálogo de produtos implementando as tecnologias mais utilizadas no mercado atual, abaixo segue uma descrição resumida das tecnologias:
 
 ## **Backend**
 
