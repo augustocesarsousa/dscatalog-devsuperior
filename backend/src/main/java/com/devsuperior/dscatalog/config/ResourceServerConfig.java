@@ -23,57 +23,78 @@ import org.springframework.web.filter.CorsFilter;
 @EnableResourceServer
 public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 
-	@Autowired
-	private Environment env;
+  @Autowired
+  private Environment env;
 
-	@Autowired
-	private JwtTokenStore tokenStore;
+  @Autowired
+  private JwtTokenStore tokenStore;
 
-	private static final String[] PUBLIC = { "/oauth/token", "/h2-console/**" };
+  private static final String[] PUBLIC = {
+    "/oauth/token",
+    "/h2-console/**",
+    "/swagger-ui/**",
+  };
 
-	private static final String[] OPERATOR_OR_ADMIN = { "/products/**", "/categories/**", "/users/change-password/**" };
+  private static final String[] OPERATOR_OR_ADMIN = {
+    "/products/**",
+    "/categories/**",
+    "/users/change-password/**",
+  };
 
-	private static final String[] ADMIN = { "/users/**" };
+  private static final String[] ADMIN = { "/users/**" };
 
-	@Override
-	public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
-		resources.tokenStore(tokenStore);
-	}
+  @Override
+  public void configure(ResourceServerSecurityConfigurer resources)
+    throws Exception {
+    resources.tokenStore(tokenStore);
+  }
 
-	@Override
-	public void configure(HttpSecurity http) throws Exception {
+  @Override
+  public void configure(HttpSecurity http) throws Exception {
+    // H2
+    if (Arrays.asList(env.getActiveProfiles()).contains("test")) {
+      http.headers().frameOptions().disable();
+    }
 
-		// H2
-		if (Arrays.asList(env.getActiveProfiles()).contains("test")) {
-			http.headers().frameOptions().disable();
-		}
+    http
+      .authorizeRequests()
+      .antMatchers(PUBLIC)
+      .permitAll()
+      .antMatchers(HttpMethod.GET, OPERATOR_OR_ADMIN)
+      .permitAll()
+      .antMatchers(OPERATOR_OR_ADMIN)
+      .hasAnyRole("OPERATOR", "ADMIN")
+      .antMatchers(ADMIN)
+      .hasAnyRole("ADMIN")
+      .anyRequest()
+      .authenticated();
 
-		http.authorizeRequests().antMatchers(PUBLIC).permitAll().antMatchers(HttpMethod.GET, OPERATOR_OR_ADMIN)
-				.permitAll().antMatchers(OPERATOR_OR_ADMIN).hasAnyRole("OPERATOR", "ADMIN").antMatchers(ADMIN)
-				.hasAnyRole("ADMIN").anyRequest().authenticated();
+    http.cors().configurationSource(corsConfigurationSource());
+  }
 
-		http.cors().configurationSource(corsConfigurationSource());
-	}
+  @Bean
+  public CorsConfigurationSource corsConfigurationSource() {
+    CorsConfiguration corsConfig = new CorsConfiguration();
+    corsConfig.setAllowedOriginPatterns(Arrays.asList("*"));
+    corsConfig.setAllowedMethods(
+      Arrays.asList("POST", "GET", "PUT", "DELETE", "PATCH")
+    );
+    corsConfig.setAllowCredentials(true);
+    corsConfig.setAllowedHeaders(
+      Arrays.asList("Authorization", "Content-Type")
+    );
 
-	@Bean
-	public CorsConfigurationSource corsConfigurationSource() {
-		CorsConfiguration corsConfig = new CorsConfiguration();
-		corsConfig.setAllowedOriginPatterns(Arrays.asList("*"));
-		corsConfig.setAllowedMethods(Arrays.asList("POST", "GET", "PUT", "DELETE", "PATCH"));
-		corsConfig.setAllowCredentials(true);
-		corsConfig.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type"));
+    UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+    source.registerCorsConfiguration("/**", corsConfig);
+    return source;
+  }
 
-		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-		source.registerCorsConfiguration("/**", corsConfig);
-		return source;
-	}
-
-	@Bean
-	public FilterRegistrationBean<CorsFilter> corsFilter() {
-		FilterRegistrationBean<CorsFilter> bean = new FilterRegistrationBean<>(
-				new CorsFilter(corsConfigurationSource()));
-		bean.setOrder(Ordered.HIGHEST_PRECEDENCE);
-		return bean;
-	}
-
+  @Bean
+  public FilterRegistrationBean<CorsFilter> corsFilter() {
+    FilterRegistrationBean<CorsFilter> bean = new FilterRegistrationBean<>(
+      new CorsFilter(corsConfigurationSource())
+    );
+    bean.setOrder(Ordered.HIGHEST_PRECEDENCE);
+    return bean;
+  }
 }
