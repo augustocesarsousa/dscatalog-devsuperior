@@ -164,32 +164,51 @@ Este projeto foi desenvolvido ao decorrer do curso Spring React da <a href="http
 
 ## Executando o projeto
 
-Baixe o código fonte e o extraia em seu diretório de preferência, exemplo (C:\Workspaces).
+### Docker
 
-### Backend
+- Requisitos:
 
-Abra a pasta backend com a sua IDE Java de preferência, recomendação (Spring Tools ou VS Code), aguarde o Maven baixar as dependências e depois execute o projeto.
+  - Docker;
+  - Docker-compose.
 
-### Frontend
+Executar o comando abaixo via terminal na rais do projeto:
 
-Abra a pasta frontend no seu terminal e execute os seguintes comandos:
+```
+docker-compose up
+```
 
-1. Instalando as dependências
+### Manual
+
+**Backend**
+
+- Requisitos
+
+  - Java 11
+  - Maven 3.6.x
+
+Executar os comandos abaixo via terminal na pasta backend:
+
+```
+mvn install
+mvn spring-boot:run
+```
+
+**Frontend**
+
+- Requisitos
+
+  - Node 14
+  - Npm (compatíval com a versão do Node)
+  - Yarn
+
+Executar os comandos abaixo via terminal na pasta frontend:
 
 ```
 yarn
-```
-
-2. Rodando o projeto
-
-```
 yarn start
 ```
 
-## Link do projeto implantado
+### Links
 
-<a href="https://acsousa-dscatalog.netlify.app/" target="_blank">DS Catalog</a>
-
-**Observação**
-
-Pelo fato do backend estar implantado no Heroku no modo free, pode levar um tempo para aparecer as listagens, isso ocorre porque o servidor hiberna se ficar inativo por mais de 30 minutos.
+- Backend Swagger: <http://localhost:8080/swagger-ui.html#/>
+- Frontend: <http://localhost:3000/>

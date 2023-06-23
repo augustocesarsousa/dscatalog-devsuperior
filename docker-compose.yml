@@ -1,0 +1,15 @@
+version: '3.5'
+
+services:
+  backend:
+    container_name: dscatalog-back
+    build: ./backend
+    ports:
+      - "8080:8080"
+  frontend:
+    container_name: dscatalog-front
+    build: ./frontend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
