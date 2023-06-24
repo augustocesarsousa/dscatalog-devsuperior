@@ -212,3 +212,23 @@ yarn start
 
 - Backend Swagger: <http://localhost:8080/swagger-ui.html#/>
 - Frontend: <http://localhost:3000/>
+
+**Usuários para teste**
+
+- Operador: operador@email.com
+- Senha: 123456
+- Operador: admin@email.com
+- Senha: 123456
+
+## Projeto implantado
+
+**Frontend**
+
+- Local: Netlify
+- Link: <https://acsousa-dscatalog.netlify.app>
+
+**Backend**
+
+- Local: Render
+- Link: <https://dscatalog-backend.onrender.com>
+- **Obs: O backend está implantado na verão free, fazendo ele hibernar após um período ocioso, isso ocasiona uma demora no retorno dos dados.**
